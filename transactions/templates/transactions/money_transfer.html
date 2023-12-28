@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block head_title %}{{ title }}{% endblock %}
+{% block content %}
+
+<div class="w-full flex mt-5 justify-center">
+    <div class="bg-white w-5/12 rounded-lg">
+        {% if title == 'Request For Loan' %}
+            <div><a class="font-bold text-blue text-center pb-5 pt-10 px-5" href="{% url 'loan_list' %}">View All Loan List</a></div>
+        {% endif %}
+
+        <div class="px-8 pt-6 pb-8 mb-4">
+            <h1 class="font-bold text-3xl text-center pb-5 pt-10 px-5">{{ title }}</h1>
+            {% if form.errors %}
+                <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4" role="alert">
+                    <p class="font-bold">Error:</p>
+                    {% for error in form.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% if success_message %}
+                <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4" role="alert">
+                    <p class="font-bold">{{ success_message }}</p>
+                </div>
+            {% endif %}
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="amount">
+                        Amount
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight border rounded-md border-gray-500 focus:outline-none focus:shadow-outline" name="amount" id="amount" type="number" required placeholder="Amount">
+                </div>
+                {% if form.amount.errors %} {% for error in form.amount.errors %}
+                    <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                {% endfor %} {% endif %}
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="receiver_account_id">
+                        Receiver Account ID
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight border rounded-md border-gray-500 focus:outline-none focus:shadow-outline" name="receiver_account_id" id="receiver_account_id" type="number" required placeholder="Receiver Account ID">
+                </div>
+                {% if form.receiver_account_id.errors %} {% for error in form.receiver_account_id.errors %}
+                    <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                {% endfor %} {% endif %}
+                <div class="flex w-full justify-center">
+                    <button class="bg-blue-900 text-white hover:text-blue-900 hover:bg-white border border-blue-900 font-bold px-4 py-2 rounded-lg" type="submit">
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
