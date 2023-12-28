@@ -1,3 +1,6 @@
+# requirements.txt
+
+# Common dependencies
 asgiref
 beautifulsoup4
 certifi
@@ -24,15 +27,11 @@ psycopg2-binary
 PyAutoGUI
 PyGetWindow
 PyMsgBox
-pyobjc-core
-pyobjc-framework-Cocoa
-pyobjc-framework-Quartz
 pyperclip
 PyRect
 pyscreenshot
 PyScreeze
 pytweening
-rubicon-objc
 soupsieve
 sqlparse
 virtualenv
