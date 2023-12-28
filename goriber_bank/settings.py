@@ -1,7 +1,7 @@
 from pathlib import Path
 import environ
 import ssl
-
+import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env()
@@ -65,15 +65,22 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': env("DB_NAME"),
+#         'USER': env("DB_USER"),
+#         'PASSWORD': env("DB_PASSWORD"),
+#         'HOST': env("DB_HOST"),
+#         'PORT': env("DB_PORT"),
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env("DB_NAME"),
-        'USER': env("DB_USER"),
-        'PASSWORD': env("DB_PASSWORD"),
-        'HOST': env("DB_HOST"),
-        'PORT': env("DB_PORT"),
-    }
+    'default': dj_database_url.config(
+        # Feel free to alter this value to suit your needs.
+        default='postgres://goriberbank_user:u92LwsyFDTUyU24LzOSo7dqfOM5Be2SI@dpg-cm6lelocmk4c738pcmng-a.oregon-postgres.render.com/goriberbank'
+    )
 }
 
 AUTH_PASSWORD_VALIDATORS = [
